@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Demo</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <base href="/"/>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<style>
+    body {
+        background-image: url("https://img.wallpapersafari.com/desktop/1920/1080/90/28/ATkc42.jpg");
+        background-size: cover;
+
+    }
+
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 150px;
+        padding-top: 200px;
+    }
+
+    h1 {
+        position: absolute;
+        top: 5%;
+        text-align: center;
+        font-style: italic;
+        color: white;
+        font-size: 90px;
+    }
+
+    .sss {
+        font-size: 60px;
+        width: 300px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        border-radius: 20px;
+    }
+
+    a {
+        color: white;
+        text-decoration: none;
+
+    }
+
+    h3 {
+        width: 800px;
+        font-size: 60px;
+        color: white;
+        font-style: revert;
+    }
+</style>
+<body>
+<div class="container unauthenticated">
+    <h1>Login page</h1>
+    <div class="sss" style="background-color: black">
+        <a href="/oauth2/authorization/github" type="github">Github</a>
+    </div>
+    <br>
+    <div class="sss" style="background-color: #ec0909">
+        <a href="/oauth2/authorization/google" type="google">Google</a>
+    </div>
+</div>
+<div class="container authenticated" style="display: none">
+    <video controls autoplay>
+        <source src="./videoplayback.mp4" type="video/mp4">
+    </video>
+    <h3>Hello <span id="user"></span></h3>
+    <h3>Batar bo'l hamma malumotlaring menda <img src="https://c.tenor.com/VECYgjXkh4oAAAAM/youmadbro-troll.gif"
+                                                  alt="troll"></h3>
+    <div>
+        <button style=" font-size: 60px;
+        width: 300px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        background-color: #0220e5;
+        border: none;
+        border-radius: 20px;" onClick="logout()" class="btn ">Logout
+        </button>
+    </div>
+</div>
+<script type="text/javascript"
+        src="/webjars/js-cookie/js.cookie.js"></script>
+<script type="text/javascript">
+    $
+        .ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (settings.type === 'POST' || settings.type === 'PUT'
+                    || settings.type === 'DELETE') {
+                    if (!(/^http:.*/.test(settings.url) || /^https:.*/
+                        .test(settings.url))) {
+                        // Only send the token to relative URLs i.e. locally.
+                        xhr.setRequestHeader("X-XSRF-TOKEN",
+                            Cookies.get('XSRF-TOKEN'));
+                    }
+                }
+            }
+        });
+    $.get("/user", function (data) {
+        $("#user").html(data.name);
+        $(".unauthenticated").hide();
+        $(".authenticated").show();
+    });
+    $.get("/user", function (getEmail) {
+        $("#type").html(getEmail.type);
+        $(".unauthenticated").hide();
+        $(".authenticated").show();
+    });
+
+    let logout = function () {
+        $.post("/logout", function () {
+            $("#user").html('');
+            $(".unauthenticated").show();
+            $(".authenticated").hide();
+        })
+        return true;
+    }
+</script>
+</body>
+</html>
