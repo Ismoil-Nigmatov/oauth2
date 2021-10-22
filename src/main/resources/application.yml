@@ -4,10 +4,10 @@ spring:
       client:
         registration:
           github:
-            clientId: badaa4c74c5e334f9b7ffm
-            clientSecret: m94ab81ecc4e036e422b43c83c5f8c1b62d44c816b
+            clientId: adaa4c74c5e334f9b7ff
+            clientSecret: 94ab81ecc4e036e422b43c83c5f8c1b62d44c816
           google:
-            client-id: b504272534633-o6mjd7ved92d1a1ejkc6in7k0h4d81t9.apps.googleusercontent.com
-            client-secret: bGOCSPX-L1wUJJfZKPDFLe1NXibi8DXOzh1Pm
+            client-id: 504272534633-o6mjd7ved92d1a1ejkc6in7k0h4d81t9.apps.googleusercontent.com
+            client-secret: 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
 
 
