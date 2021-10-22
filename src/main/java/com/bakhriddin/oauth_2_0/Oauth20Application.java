@@ -44,8 +44,7 @@ public class Oauth20Application extends WebSecurityConfigurerAdapter {
     public String getCategoryList(Model model){
             model.addAttribute("userList", userRepository.findAll());
         return "users";
-        //asosiysi, odatda bitta modelga bitta obyekt joylanadi, man shunaqa o'rganganman
-            //siz hali screenshotda gruppa hm tushunarlik hozir gmail orqalik kirsda, baitta modelgam 2ta obyekt j oylagandiz
+
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
