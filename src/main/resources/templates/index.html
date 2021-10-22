@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -99,7 +99,7 @@
 
 
 <div class="container authenticated" style="display: none">
-    <h3>Hello <span id="userName"></span> I have all your information</h3>
+    <h3>Hello I have all your information click GetUsers</h3>
     <div class="btn logout" onclick="logout()"><a>Logout</a></div>
     <div class="btn"><a href="/lists">Get users</a></div>
 </div>
@@ -121,14 +121,12 @@
                 }
             }
         });
-    $.get("/user", function (data) {
-        $("#userName").html(data.name);
+    $.get("/user", function () {
         $(".unauthenticated").hide();
         $(".authenticated").show();
     });
     let logout = function () {
         $.post("/logout", function () {
-            $("#userName").html('');
             $(".unauthenticated").show();
             $(".authenticated").hide();
         })

@@ -1,7 +1,5 @@
 package com.bakhriddin.oauth_2_0;
 
-import java.util.*;
-
 import com.bakhriddin.oauth_2_0.entity.User;
 import com.bakhriddin.oauth_2_0.repository.UserRepository;
 import org.springframework.boot.SpringApplication;
@@ -13,11 +11,12 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-@RestController
+@Controller
 public class Oauth20Application extends WebSecurityConfigurerAdapter {
     final
     UserRepository userRepository;
@@ -25,9 +24,8 @@ public class Oauth20Application extends WebSecurityConfigurerAdapter {
     public Oauth20Application(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
     @GetMapping("/user")
-    public Map<String, Object> user(@AuthenticationPrincipal OAuth2User principal) {
+    public String user(@AuthenticationPrincipal OAuth2User principal) {
         User RegisterUser = new User();
         RegisterUser.setBio(principal.getAttribute("bio"));
         RegisterUser.setEmail(principal.getAttribute("email"));
@@ -39,10 +37,16 @@ public class Oauth20Application extends WebSecurityConfigurerAdapter {
         RegisterUser.setType(principal.getAttribute("type"));
         RegisterUser.setUrl(principal.getAttribute("url"));
         userRepository.save(RegisterUser); // save db
-        return Collections.singletonMap("name", principal.getAttribute("name")); // name
+        return "index";
+
     }
-
-
+        @GetMapping("/lists")
+    public String getCategoryList(Model model){
+            model.addAttribute("userList", userRepository.findAll());
+        return "users";
+        //asosiysi, odatda bitta modelga bitta obyekt joylanadi, man shunaqa o'rganganman
+            //siz hali screenshotda gruppa hm tushunarlik hozir gmail orqalik kirsda, baitta modelgam 2ta obyekt j oylagandiz
+    }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
