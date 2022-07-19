@@ -24,6 +24,7 @@ public class Oauth20Application extends WebSecurityConfigurerAdapter {
     public Oauth20Application(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
     @GetMapping("/user")
     public String user(@AuthenticationPrincipal OAuth2User principal) {
         User RegisterUser = new User();
@@ -38,14 +39,15 @@ public class Oauth20Application extends WebSecurityConfigurerAdapter {
         RegisterUser.setUrl(principal.getAttribute("url"));
         userRepository.save(RegisterUser); // save db
         return "index";
-
     }
-        @GetMapping("/lists")
-    public String getCategoryList(Model model){
-            model.addAttribute("userList", userRepository.findAll());
+
+    @GetMapping("/lists")
+    public String getCategoryList(Model model) {
+        model.addAttribute("userList", userRepository.findAll());
         return "users";
 
     }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off

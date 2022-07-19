@@ -4,10 +4,12 @@ spring:
       client:
         registration:
           github:
-            clientId: github
-            clientSecret: github
+            clientId: 6d1947a3ab6d8c4a6189
+            clientSecret: dd503d32db73b1157a49e7c08f28feef5c6bd34f
           google:
-            client-id: google
-            client-secret: google
+            clientId: 905434615323-3jn85pqbt0jnm04bo0r4one464vkd32v.apps.googleusercontent.com
+            clientSecret: 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
+#            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
 
+#
 
