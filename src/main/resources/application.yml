@@ -7,8 +7,8 @@ spring:
             clientId: 6d1947a3ab6d8c4a6189
             clientSecret: dd503d32db73b1157a49e7c08f28feef5c6bd34f
           google:
-            clientId: 905434615323-3jn85pqbt0jnm04bo0r4one464vkd32v.apps.googleusercontent.com
-            clientSecret: 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
+            clientId: 1091128367767-5do1gle598oi4l6jaf5ckqtdi0vkdcje.apps.googleusercontent.com
+            clientSecret: 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
 #            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
 
 #
