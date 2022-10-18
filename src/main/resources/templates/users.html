@@ -38,9 +38,9 @@
     <tbody>
     <tr th:each="user, state: ${userList}">
         <td th:text="${state.count}"></td>
-        <td th:text="${user.getName}"></td>
-        <td th:text="${user.getEmail}"></td>
-        <td th:text="${user.getPicture()}"></td>
+        <td th:text="${user.getAvatar_url()}"></td>
+        <td th:text="${user.getLogin()}"></td>
+        <td th:text="${user.getUrl()}"></td>
     </tr>
     </tbody>
 </table>
